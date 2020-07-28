@@ -23,7 +23,7 @@
     "@ng-select/ng-select": "^2.16.0",
     "bootstrap": "^4.4.1",
     "core-js": "^2.5.4",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "moment": "^2.24.0",
     "ngx-bootstrap": "^5.2.0",
     "ngx-spinner": "^6.1.2",
