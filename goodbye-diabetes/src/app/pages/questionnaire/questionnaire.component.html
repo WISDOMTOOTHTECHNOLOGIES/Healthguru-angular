@@ -1,0 +1,335 @@
+<div class="container">
+    <span style="cursor: pointer;" class="back" routerLink="/viewuser/{{phone_num}}"><i class="fa fa-arrow-left"></i> <u>Back</u></span>
+    <h2 class="h2-color">Questionnaire</h2>
+    <!--<h6 class="text-center">PERSONAL DETAILS</h6>
+  <div class="row">
+    <div class="col-md-4">1. Please enter your address</div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">Hosur</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">2. What is your education and profession?
+      Please enter your education & profession
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">Flamer & B.SC</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">2. What is your education and profession?
+      Please enter your education & profession
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">Flamer & B.SC</div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-4">3. Do you use drugs or alcohol?</div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">No</div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-4">4. How often do you smoke?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">No</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">5. Are you vegetarian?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">No</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">6. Are you doing any exercise or yoga regularly?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">No</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">7. Are you using sugar or any other sweets?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">No</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">8. Are you facing any sexual problems like Impotence, Frigidity, Sterility etc.?</div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">No</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">9. What are the symptoms of your sickness?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">No</div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-4">10. Are you allergic to any medicines?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">No</div>
+  </div>-->
+
+    <!--<h6 class="text-center">A. DIABETES</h6>-->
+    <div>
+        <div class="row">
+            <div class="col-md-4">1. How many years since you have been detected with any of these lifestyle diseases? 
+            </div> 
+            <div class="col-md-1"></div>
+            <div class="col-md-5" *ngIf="isAvailable"> <br>
+              <!--{{questionnarieAns[0].diabetes}}-->
+              <br>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">DIABETES
+          </div> 
+          <div class="col-md-1">:</div>
+          <div class="col-md-5" *ngIf="isAvailable"> 
+            {{questionnarieAns[0].diabetes_year}}.{{questionnarieAns[0].diabetes_month}}  
+            <br>
+          </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">HYPERTENSION
+        </div> 
+        <div class="col-md-1">:</div>
+        <div class="col-md-5" *ngIf="isAvailable"> 
+          {{questionnarieAns[0].hypertension_year}}.{{questionnarieAns[0].hypertension_month}}  
+          <br>
+        </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">HYPERLIPIDEMIA
+      </div> 
+      <div class="col-md-1">:</div>
+      <div class="col-md-5" *ngIf="isAvailable"> 
+        {{questionnarieAns[0].hyperlipidiemia_year}}.{{questionnarieAns[0].hyperlipidiemia_month}}  
+        <br>
+      </div>
+  </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">2. How many years since you have you been on medication?
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-5" *ngIf="isAvailable">{{questionnarieAns[0].medication}}</div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">DIABETES
+          </div>
+          <div class="col-md-1">:</div>
+          <div class="col-md-5" *ngIf="isAvailable">{{questionnarieAns[0].med_diabetes_year}}.{{questionnarieAns[0].med_diabetes_month}}</div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">HYPERTENSION
+        </div>
+        <div class="col-md-1">:</div>
+        <div class="col-md-5" *ngIf="isAvailable">{{questionnarieAns[0].med_hypertension_year}}.{{questionnarieAns[0].med_hypertension_month}}</div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">HYPERLIPIDEMIA
+      </div>
+      <div class="col-md-1">:</div>
+      <div class="col-md-5" *ngIf="isAvailable">{{questionnarieAns[0].med_hyperlipidiemia_year}}.{{questionnarieAns[0].med_hyperlipidiemia_month}}</div>
+  </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">3. Are you on Insulin and for how many years (give yes or no option and (no of years column)?
+            </div>
+            <div class="col-md-1">:</div>
+            <div class="col-md-5" *ngIf="isAvailable">
+              <label *ngIf="questionnarieAns[0].insulin == '1'">yes, {{questionnarieAns[0].insulin_years}}</label>
+              <label *ngIf="questionnarieAns[0].insulin != '1'">no</label>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">4. Do you have any addictive habits?
+            </div>
+            <div class="col-md-1">:</div>
+            <div class="col-md-5" *ngIf="isAvailable">
+              <label *ngIf="questionnarieAns[0].bad_habits == '1'">yes, {{questionnarieAns[0].bad_habits_years}}</label>
+              <label *ngIf="questionnarieAns[0].bad_habits != '1'">no</label>
+            </div>
+        </div>
+        <br>
+        <div class="row"> 
+            <div class="col-md-4">5. Do you consume sugar or any other sweets?
+            </div>
+            <div class="col-md-1">:</div>
+            <div class="col-md-5" *ngIf="isAvailable">
+              <label *ngIf="questionnarieAns[0].using_sugar == '1'">yes, {{questionnarieAns[0].using_sugar_years}}</label>
+              <label *ngIf="questionnarieAns[0].using_sugar != '1'">no</label>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">6. Are you facing any problems like Impotence, Frigidity? Any history of Infertility or Sterility?
+            </div>
+            <div class="col-md-1">:</div>
+            <div class="col-md-5" *ngIf="isAvailable">
+              <label *ngIf="questionnarieAns[0].facing_problems == '1'">yes, {{questionnarieAns[0].facing_problems_years}} </label>
+              <label *ngIf="questionnarieAns[0].facing_problems != '1'">no</label>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">7. Any other complications or symptoms related to your disease?
+            </div>
+            <div class="col-md-1">:</div>
+            <div class="col-md-5" *ngIf="isAvailable">
+              <label *ngIf="questionnarieAns[0].complications == '1'">yes, {{questionnarieAns[0].complications_years}}</label>
+              <label *ngIf="questionnarieAns[0].complications != '1'">no</label>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">8. Are you allergic to any medicines?
+            </div>
+            <div class="col-md-1">:</div>
+            <div class="col-md-5" *ngIf="isAvailable">
+              <label *ngIf="questionnarieAns[0].any_allergic == '1'">yes, {{questionnarieAns[0].any_allergic_years}}</label>
+              <label *ngIf="questionnarieAns[0].any_allergic != '1'">no</label>
+            </div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">9. List of medicines / insulin consumed at present
+            </div>
+            <div class="col-md-1">:</div>
+            <div class="col-md-5" *ngIf="isAvailable">{{questionnarieAns[0].listofmedicine}}</div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-4">10. What is your educational qualification?
+            </div>
+            <div class="col-md-1">:</div>
+            <div class="col-md-5" *ngIf="isAvailable">{{questionnarieAns[0].qualification}}</div>
+        </div>
+
+        <!--<h6 class="text-center">B. HYPERLIPIDEMIA</h6>
+
+  <div class="row">
+    <div class="col-md-4">1. How many years since Cholesterol was detected?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">March 2019</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">2. How many years have you been on medication?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">No,March 2020</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">3. Are you obese?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5"> No</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">4. List of medicines consuming at present
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5"> Daily</div>
+  </div>
+
+
+  <h6 class="text-center">C. HYPERTENSION</h6>
+
+  <div class="row">
+    <div class="col-md-4">1. How many years since high blood pressure (BP) was detected?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">March 2019</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">2. How many years have you been on medication?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">No,March 2020</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">5. List of medicines consuming at present
+      Please enter the list of medicines
+
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5"> No</div>
+  </div>
+
+  <h6 class="text-center">D. SEXUAL PROBLEMS</h6>
+  <p><b>Gents</b></p>
+  <ul>
+    <li class="li-color">Prostate cancer :No </li>
+    <li class="li-color">Infertility :No </li>
+    <li class="li-color">Any Erectile Dysfunction:No </li>
+    <li class="li-color">Ejaculation problems :No </li>
+
+  </ul>
+
+
+  <p><b>Female</b></p>
+  <ul>
+    <li class="li-color">Infertility :No </li>
+    <li class="li-color">PCOD(Poly Cystic Ovarian Disease) :No </li>
+    <li class="li-color">Menstrual problems (Teenagers also) :No </li>
+    <li class="li-color">Fibroid uterus :No </li>
+    <li class="li-color">Hormonal Imbalance :No </li>
+    <li class="li-color">Obesity :No </li>
+  </ul>
+
+
+  <h6 class="text-center">E. THYROID</h6>
+
+  <div class="row">
+    <div class="col-md-4">1. How many years since thyroid was detected?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">March 2019</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">2.	How many years have you been on medication?
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">March 2019</div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">3.	Please mention your disease type Hypothyroidism or Hyperthyroidism
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">March 2019</div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">4.	Are you obese? 
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">March 2019</div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">5.	List of medicines consuming at present 
+    </div>
+    <div class="col-md-1">:</div>
+    <div class="col-md-5">March 2019</div>
+  </div>-->
+    </div>
+</div>

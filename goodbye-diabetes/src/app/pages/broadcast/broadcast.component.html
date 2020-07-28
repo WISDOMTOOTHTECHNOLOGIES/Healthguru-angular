@@ -1,0 +1,126 @@
+<div class="container">
+  <div class="row">
+      <div class="col-4">
+          <button class="btn btn-success btn-round m1-auto" data-toggle="modal" data-target="#exampleModalCenter"><i
+                class="fa fa-plus" (click)="openBroadcast()"></i>New Broadcast</button>
+          <!-- The Modal -->
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header bg-success">
+                          <h5 class="modal-title" id="exampleModalLongTitle">New Broadcast</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <form>
+                          <div class="">
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="input-group">
+                                  <input name="link" type="text" placeholder="Link" class="form-control" [(ngModel)]="link" >
+                                </div>
+                              </div>
+                            </div>
+                            <br>
+                              <div class="input-group">
+                                  <input type="file" class="filepicker" id="inpFile" (change)="onFileChanged($event)" style="display: none;">
+                                  <textarea name="message" class="form-control type_msg" placeholder="Type your message..." [(ngModel)]="message"></textarea>
+                                  <!--<div class="input-group-append">
+                                      <span class="input-group-text attach_btn" data-toggle="modal" data-target="#cameraModal" (click)="startCamera()"><i class="fa fa-camera"></i></span>
+                                  </div>-->
+                                  <div class="input-group-append" (click)="selectFile()">
+                                      <span class="input-group-text attach_btn"><i class="fa fa-paperclip"></i></span>
+                                  </div>
+                                  <!--<div class="input-group-append"> 
+                                      <span class="input-group-text attach_btn" data-toggle="modal" data-target="#voiceModal"><i class="fa fa-microphone"></i></span>
+                                  </div>-->
+                                  <div class="input-group-append" data-dismiss="modal" (click)="sendMessage()">
+                                      <span class="input-group-text send_btn"><i class="fa fa-location-arrow"></i></span>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" [ngStyle]="{'display':display}">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header bg-success">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Edit Event</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control" placeholder="Title Event *" value="" [(ngModel)]="updateTitle" />
+                                  </div>
+                                  <div class="form-group">
+                                      <input type="file" class="form-control" placeholder="" (change)="onEditFileChanged($event)" value="" />
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control" placeholder="Link Image" value="" [(ngModel)]="updateImage_link" />
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                          <button (click)="updateEvent()" type="button" data-dismiss="modal" class="btn btn-success">SAVE</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-12">
+          <table class="table table-borderless">
+              <thead>
+                  <tr>
+                      <th>Date</th>
+                      <th>Message</th>
+                      <th>Link</th>
+                      <th>File</th>
+                  </tr>
+              </thead>
+              <tbody class="nodata"> </tbody>
+              <tbody class="bg-white1">
+                <tr *ngFor="let rows of allMessages">
+                    <td>
+                        <b>{{rows.date | date: 'dd-MM-yyyy'}}</b>
+                        {{rows.date | date: 'h:mm:ss a'}}
+                    </td>
+                    <td>{{rows.message}}</td>
+                    <td>
+                        <a class="link-msg" target="blank" [href]="rows.link">{{rows.link}}</a>
+                    </td>
+                    <td>
+                        <div *ngIf="rows.file_type == 'image'">
+                            <img [src]="rows.file" height="80px" width="80px" >
+                        </div>
+                        <div *ngIf="rows.file_type == 'pdf'">
+                            <div class="file-link" id="photo" (click)="viewFile(rows.file)" data-toggle="modal" role="dialog">
+                                <!-- <img src="https://via.placeholder.com/22x22"> -->
+                                <i style="font-size:24px;color:red" class="fa">&#xf1c1;</i> File
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>

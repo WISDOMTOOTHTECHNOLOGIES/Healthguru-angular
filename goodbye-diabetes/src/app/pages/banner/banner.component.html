@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="row">
+
+        <div class="col-2">
+            <!--<button class="btn btn-success btn-round m1-auto" data-toggle="modal" data-target="#exampleModalCenter"><i
+                    class="fa fa-plus"></i>Add Banner</button>-->
+
+            <!-- The Modal -->
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-success">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Add Banner</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Title *" value="" [(ngModel)]="title" />
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="file" class="form-control" placeholder="" (change)="onAddFileChanged($event)" value="" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Link Image" value="" [(ngModel)]="image_link" />
+                                    </div>
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                            <button (click)="saveBanner()" type="button" data-dismiss="modal" class="btn btn-success">SAVE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle2" aria-hidden="true" [ngStyle]="{'display':display}">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header bg-success">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Edit Banner</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="row" *ngIf="editBanner">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Link Image" value="{{editBanner.url_link}}" [(ngModel)]="updateImage_link" />
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <input type="file" class="form-control" placeholder="" (change)="onEditFileChanged($event)" value="" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                            <button (click)="updateBanner()" type="button" data-dismiss="modal" class="btn btn-success">SAVE</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-borderless">
+                <thead>
+                    <tr>
+                        <th colspan="1">ID</th>
+                        <!--<th colspan="1">TITLE</th>-->
+                        <th>BANNER LINK</th>
+                        <th>IMAGES</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody class="nodata"> </tbody>
+                <tbody class="bg-white1">
+                    <tr *ngFor="let row of allBanners"> 
+                        <td>{{row.id}}</td>
+                        <!--<td></td>-->
+                        <td>{{row.url_link}}</td>
+                        <td>
+                            <img height="45px" width="45px" src="{{row.image_path}}" />
+                        </td>
+                        <td>
+                            <button class="btn btn-info" title="Edit" data-toggle="modal" data-target="#exampleModalCenter2" (click)="edit_banner(row.id)">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </td>
+                        <!--<button class="btn btn-danger" title="Delete"><i class="fa fa-trash"></i></button></td>-->
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

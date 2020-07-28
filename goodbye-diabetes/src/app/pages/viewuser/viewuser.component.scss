@@ -1,0 +1,255 @@
+.container {
+    .back {
+        font-size: 1.2em;
+        font-weight: 500;
+        cursor: pointer;
+        i {
+            font-size: 18px;
+        }
+    }
+}
+
+.table-area {
+    overflow: auto;
+    thead {
+        color: #8e908d;
+    }
+    tbody {
+        color: black;
+        padding: 5px;
+        font-weight: 500;
+        .wrap {
+            max-width: 200px;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+        button {
+            background: linear-gradient(#025076, #0992A5);
+            border-radius: 3px;
+            border: none;
+            color: white;
+        }
+    }
+}
+
+.table-area {
+    tbody tr:nth-child(even) {
+        background-color: #E5F4F2;
+    }
+}
+
+.table-area thead {
+    width: 100%;
+    display: block;
+    overflow: auto;
+    background: transparent;
+}
+
+.table-area tbody {
+    display: block;
+    overflow: auto;
+    height: calc(100vh - 120px);
+    width: 100%;
+    background: white;
+}
+
+.table-area thead tr {
+    display: block;
+}
+
+.table-area th,
+.table-area td {
+    width: 200px;
+}
+
+.tabBlock {
+    .nav-item {
+        width: 30%;
+    }
+    .nav-tabs {
+        width: 100%;
+        font-size: 1em;
+        color: #4b4848 !important;
+        text-align: center;
+        font-size: medium;
+        font-weight: 500;
+    }
+    .nav-link {
+        color: black !important;
+    }
+    .nodata {
+        text-align: center;
+    }
+    .tab-content {
+        .unavailable {
+            text-align: center;
+            color: lightslategrey;
+        }
+        #photo {
+            background: white;
+            padding: 8px 9px;
+            border-radius: 7px;
+            cursor: pointer;
+            i,
+            span {
+                vertical-align: middle;
+            }
+            i {
+                margin-right: 8px;
+            }
+        }
+        .row {
+            .col-sm-2 {
+                font-size: 1.1em;
+            }
+            .col-sm-8 {
+                font-size: 1.1em;
+                font-weight: 500;
+                font-style: italic;
+            }
+        }
+        .selectBlock {
+            // width: 20%;
+            margin-left: 32%;
+            span {
+                font-size: 1.2em;
+                color: #3d6a6b;
+                font-weight: 700;
+            }
+        }
+        #healthdata {
+            .tableBlock {
+                width: 100%;
+                overflow: auto;
+            }
+            table {
+                width: 100%;
+                background: white;
+            }
+            table,
+            th,
+            td {
+                border: 1px solid black;
+            }
+            .float {
+                position: absolute;
+                width: 60px;
+                height: 60px;
+                bottom: 40px;
+                right: 30px;
+                background-color: #1f6486;
+                color: #FFF !important;
+                border-radius: 50%;
+                text-align: center;
+                box-shadow: 2px 2px 3px #999;
+                z-index: 1;
+                transition: all 0.1s ease-in-out;
+                cursor: pointer;
+            }
+            .my-float {
+                margin-top: 25px;
+            }
+            .notelist {
+                accordion {
+                    height: calc(100vh - 350px);
+                    overflow: scroll;
+                }
+                accordion-group {
+                    .date {
+                        margin-left: 60px;
+                    }
+                }
+                p {
+                    color: #4b7576;
+                    font-weight: 700;
+                    font-style: italic;
+                    font-size: 1.2em;
+                }
+                textarea {
+                    resize: none;
+                }
+            }
+        }
+        #reports {
+            .tableBlock {
+                width: 100%;
+                overflow: auto;
+            }
+            table {
+                width: 100%;
+                background: white;
+            }
+            table,
+            th,
+            td {
+                border: 1px solid black;
+            }
+            .float {
+                position: fixed;
+                width: 60px;
+                height: 60px;
+                bottom: 40px;
+                right: 80px;
+                background-color: #1f6486;
+                color: #FFF !important;
+                border-radius: 50%;
+                text-align: center;
+                box-shadow: 2px 2px 3px #999;
+                z-index: 1;
+                transition: all 0.1s ease-in-out;
+                cursor: pointer;
+            }
+            .my-float {
+                margin-top: 25px;
+            }
+            .notelist {
+                accordion {
+                    height: calc(100vh - 350px);
+                    overflow: scroll;
+                }
+                accordion-group {
+                    .date {
+                        margin-left: 60px;
+                    }
+                }
+                p {
+                    color: #4b7576;
+                    font-weight: 700;
+                    font-style: italic;
+                    font-size: 1.2em;
+                }
+                textarea {
+                    resize: none;
+                }
+            }
+        }
+    }
+}
+
+.nav-tabs .nav-link.active {
+    color: #0062cc !important;
+    border-color: transparent transparent #0062cc !important;
+    // background-color: transparent !important;
+    background-color: #ffffff !important;
+}
+
+.img-container {
+    background-position: center;
+    background-repeat: no-repeat;
+    align-content: center;
+}
+
+// .modal {
+//     .modal-content {
+//         border: none !important;
+//         background-color: transparent !important;
+//     }
+//     button {
+//         position: absolute;
+//         color: white;
+//         top: 13px;
+//         right: -45px;
+//         font-size: 35px;
+//     }
+// }

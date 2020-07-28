@@ -1,0 +1,713 @@
+<div class="container">
+    <span class="back" routerLink="/Chat"><i class="fa fa-arrow-left" style="font-size:18px"></i> <u>Back</u></span>
+    <br>
+    <br>
+    <div class="row col-container block1">
+        <div class="col chat">
+            <div #scrollMe class="messages-list" [scrollTop]="scrollMe.scrollHeight">
+                <div *ngFor="let rows of allMessages; let i=index;">
+                    <div *ngIf="i == 0">
+                        <div style="text-align: center;"><span style="padding: 7px;
+                            background: green;
+                            color: white;
+                            border-radius: 16px;">{{ allMessages[i].time |  date:'dd-MMM-yyyy' }}</span></div>
+                    </div>
+                    <div *ngIf="i != 0">
+                        <div *ngIf="(allMessages[i].time | date:'dd-MMM-yyyy') != (allMessages[i-1].time | date:'dd-MMM-yyyy')" style="text-align: center;"><span style="padding: 7px;
+                            background: green;
+                            color: white;
+                            border-radius: 16px;">{{ allMessages[i].time |  date:'dd-MMM-yyyy' }}</span>
+                        </div>
+                    </div>
+                    <div class="row chats-right" *ngIf="(rows.type === 'broadcast')">
+                        <span>
+                            <p class="msg">
+                                <span *ngIf="rows.message.file_type == 'image'" class="msg-con">
+                                    <img [src]="rows.message.file" height="80px" width="80px">
+                                    <br/>
+                                </span>
+                                <span *ngIf="rows.message.file_type == 'pdf'" class="msg-con">
+                                    <div id="photo" (click)="viewFile(rows.message)" data-toggle="modal" role="dialog">
+                                        <!-- <img src="https://via.placeholder.com/22x22"> -->
+                                        <i style="font-size:24px;color:red" class="fa">&#xf1c1;</i> File
+                                    </div>
+                                    <br/>
+                                </span>
+                                <span *ngIf="rows.message.link" class="msg-con">
+                                    <br/>
+                                    <a class="link-msg" [href]="rows.message.link" target="blank">{{rows.message.link}}</a>
+                                    <br/>
+                                </span>
+                                <span *ngIf="rows.message.message" class="msg-con">
+                                    {{rows.message.message}}
+                                    <br/>
+                                </span>
+                            </p> <br/>
+                            <span>{{rows.time | date:'h:mm a'}}</span>
+                        </span>
+                    </div>
+                    <div class="row chats-left" *ngIf="(rows.type === 'message') && !(rows.username === '1234567890')">
+                        <span>
+                             <p>{{rows.message}}</p>
+                             <span>{{rows.time | date:'h:mm a'}}</span>
+                        </span>
+                    </div>
+                    <div class="row chats-right" *ngIf="(rows.type === 'message') && (rows.username === '1234567890')">
+                        <span>
+                            <p class="msg"> {{rows.message}}</p> <br/>
+                            <span>{{rows.time | date:'h:mm a'}}</span>
+                        </span>
+                    </div>
+                    <div class="row chats-left" *ngIf="(rows.type === 'link') && !(rows.username === '1234567890')">
+                        <span>
+                             <p><a class="link-msg" [href]="rows.message" target="_blank">{{rows.message}}</a></p>
+                             <span>{{rows.time | date:'h:mm a'}}</span>
+                        </span>
+                    </div>
+                    <div class="row chats-right" *ngIf="(rows.type === 'link') && (rows.username === '1234567890')">
+                        <span>
+                            <p class="msg"> <a class="link-msg" [href]="rows.message" target="_blank">{{rows.message}}</a></p> <br/>
+                            <span>{{rows.time | date:'h:mm a'}}</span>
+                        </span>
+                    </div>
+                    <div class="row chats-right" *ngIf="(rows.type === 'videolink') && (rows.username === '1234567890')">
+                        <p>
+                            <img src="{{rows.thumbnail}}" height="80px" width="80px" /> <br/> <br/>
+                            Video file 
+                        </p>
+                        <span>{{rows.time | date:'h:mm a'}}</span>
+                    </div>
+                    <div class="row chats-right" *ngIf="(rows.type === 'youtubelink') && (rows.username === '1234567890')">
+                        <span>
+                            <p class="msg"> <a class="link-msg" [href]="rows.message" target="_blank">{{rows.message}}</a></p> <br/>
+                            <span>{{rows.time | date:'h:mm a'}}</span> 
+                        </span>
+                    </div>
+                    <div class="row chats-left" *ngIf="(rows.type === 'image') && !(rows.username === '1234567890')">
+                        <span>
+                            <img src="{{rows.message}}" height="80px" width="80px" />
+                        </span>
+                        <span>{{rows.time | date:'h:mm a'}}</span>
+                    </div>
+                    <div class="row chats-right" *ngIf="(rows.type === 'image') && (rows.username === '1234567890')">
+                        <p>
+                            <img src="{{rows.message}}" height="80px" width="80px" />
+                        </p>
+                        <span>{{rows.time | date:'h:mm a'}}</span>
+                    </div>
+                    <div class="row chats-left" *ngIf="(rows.type === 'audio') && !(rows.username === '1234567890')">
+                        <audio controls controlsList="nodownload">
+                        <source [src]="rows.message">
+                        </audio> 
+                        <span>{{rows.time | date:'h:mm a'}}</span>
+                    </div>
+                    <div class="row chats-right" *ngIf="(rows.type === 'audio') && (rows.username === '1234567890')">
+                        <p>
+                            <audio controls controlsList="nodownload">
+                            <source [src]="rows.message">
+                            </audio>
+                        </p>
+                        <span>{{rows.time | date:'h:mm a'}}</span>
+                    </div>
+                    <div class="row chats-left" *ngIf="(rows.type === 'pdf') && !(rows.username === '1234567890')">
+                        <div class="col-md-3">
+                            <div id="photo" (click)="viewFile(rows.message)" data-toggle="modal" role="dialog">
+                                <i style="font-size:24px;color:red" class="fa">&#xf1c1;</i>
+                                <span>Document</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row chats-right" *ngIf="(rows.type === 'pdf') && (rows.username === '1234567890')">
+                         <div class="chat-file-right">
+                            <span>
+                                <div id="photo" (click)="viewFile(rows.message)" data-toggle="modal" role="dialog">
+                                    <!-- <img src="https://via.placeholder.com/22x22"> -->
+                                    <i style="font-size:24px;color:red" class="fa">&#xf1c1;</i> File
+                                </div>
+                            </span>
+                        </div>
+                        <br>
+                        <span>{{rows.time | date:'h:mm a'}}</span>
+                    </div>
+                </div>
+            </div>
+            <form>
+                <div class="">
+                    <div class="input-group">
+                        <input type="file" class="filepicker" id="inpFile" (change)="onFileChanged($event)" style="display: none;" multiple>
+                        <textarea name="chat_message" class="form-control type_msg" placeholder="Type your message..." [(ngModel)]="chat_message"></textarea>
+                        <div class="input-group-append">
+                            <span class="input-group-text attach_btn" data-toggle="modal" data-target="#cameraModal" (click)="startCamera()"><i class="fa fa-camera"></i></span>
+                        </div>
+                        <div class="input-group-append" (click)="selectFile()">
+                            <span class="input-group-text attach_btn"><i class="fa fa-paperclip"></i></span>
+                        </div>
+                        <div class="input-group-append"> 
+                            <span class="input-group-text attach_btn" data-toggle="modal" data-target="#voiceModal"><i class="fa fa-microphone"></i></span>
+                        </div>
+                        <div class="input-group-append" (click)="sendMessage()">
+                            <span class="input-group-text send_btn"><i class="fa fa-location-arrow"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="col report">
+            <div class="report-lists">
+                <div class="tabBlock">
+                    <ul class="nav nav-tabs mb-4" role="tablist">
+
+                        <li class="nav-item">
+                            <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#healthdata" role="tab" data-toggle="tab">Health Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#patienthistory" role="tab" data-toggle="tab">Patient History</a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="profile">
+
+                            <div class="content">
+
+                                <div class="unavailable"></div>
+                                <div>
+                                    <div class="row mb-2">
+                                        <label for="inputEmail" class="col-sm-2">Name</label>
+                                        <label for="inputEmail" class="col-sm-1">:</label>
+                                        <div class="col-sm-8">{{user_name}}</div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="inputEmail" class="col-sm-2">Patient Id</label>
+                                        <label for="inputEmail" class="col-sm-1">:</label>
+                                        <div class="col-sm-8">{{patient_id}}</div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="inputEmail" class="col-sm-2">Age</label>
+                                        <label for="inputEmail" class="col-sm-1">:</label>
+                                        <div class="col-sm-8">{{user_age}}</div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="inputEmail" class="col-sm-2">Gender</label>
+                                        <label for="inputEmail" class="col-sm-1">:</label>
+                                        <div class="col-sm-8">{{user_gender}} </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="inputEmail" class="col-sm-2">Country</label>
+                                        <label for="inputEmail" class="col-sm-1">:</label>
+                                        <div class="col-sm-8">{{user_country}} </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="inputEmail" class="col-sm-2">Phone</label>
+                                        <label for="inputEmail" class="col-sm-1">:</label>
+                                        <div class="col-sm-8">{{user_num}} </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="inputEmail" class="col-sm-2">Email ID</label>
+                                        <label for="inputEmail" class="col-sm-1">:</label>
+                                        <div class="col-sm-8">{{user_email}} </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label for="inputEmail" class="col-sm-2">Data of Joining</label>
+                                        <label for="inputEmail" class="col-sm-1">:</label>
+                                        <div class="col-sm-8">{{user_joiningdate |  date:'dd-MM-yyyy'}} </div>
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <label for="inputEmail" class="col-sm-2">Patient Type</label>
+                                        <label for="inputEmail" class="col-sm-1">:</label>
+                                        <div class="col-sm-8">{{user_patient_type}}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane fade" id="healthdata">
+                            <div class="content">
+                                <div class="selectBlock mb-2">
+                                    <span>Select Day </span>
+                                    <select #healthDays (change)='onHealthDayChange(healthDays.value)'>
+                                        <option value="1">Day 1</option>
+                                        <option value="2">Day 2</option>
+                                        <option value="3">Day 3</option>
+                                        <option value="4">Day 4</option>
+                                        <option value="5">Day 5</option>
+                                        <option value="6">Day 6</option>
+                                        <option value="7">Day 7</option>
+                                        <option value="8">Day 8</option>
+                                        <option value="9">Day 9</option>
+                                        <option value="10">Day 10</option>
+                                        <option value="11">Day 11</option>
+                                        <option value="12">Day 12</option>
+                                        <option value="13">Day 13</option>
+                                        <option value="14">Day 14</option>
+                                        <option value="15">Day 15</option>
+                                        <option value="16">Day 16</option>
+                                        <option value="17">Day 17</option>
+                                        <option value="18">Day 18</option>
+                                        <option value="19">Day 19</option>
+                                        <option value="20">Day 20</option>
+                                        <option value="21">Day 21</option>
+                                        <option value="22">Day 22</option>
+                                        <option value="23">Day 23</option>
+                                        <option value="24">Day 24</option>
+                                        <option value="25">Day 25</option>
+                                        <option value="26">Day 26</option>
+                                        <option value="27">Day 27</option>
+                                        <option value="28">Day 28</option>
+                                        <option value="29">Day 29</option>
+                                        <option value="30">Day 30</option>
+                                        <option value="31">Day 31</option>
+                                        <option value="32">Day 32</option>
+                                        <option value="33">Day 33</option>
+                                        <option value="34">Day 34</option>
+                                        <option value="35">Day 35</option>
+                                        <option value="36">Day 36</option>
+                                        <option value="37">Day 37</option>
+                                        <option value="38">Day 38</option>
+                                        <option value="39">Day 39</option>
+                                        <option value="40">Day 40</option>
+                                        <option value="41">Day 41</option>
+                                        <option value="42">Day 42</option>
+                                        <option value="43">Day 43</option>
+                                        <option value="44">Day 44</option>
+                                        <option value="45">Day 45</option>
+                                        <option value="46">Day 46</option>
+                                        <option value="47">Day 47</option>
+                                        <option value="48">Day 48</option>
+                                        <option value="49">Day 49</option>
+                                        <option value="50">Day 50</option>
+                                        <option value="51">Day 51</option>
+                                        <option value="52">Day 52</option>
+                                        <option value="53">Day 53</option>
+                                        <option value="54">Day 54</option>
+                                        <option value="55">Day 55</option>
+                                        <option value="56">Day 56</option>
+                                        <option value="57">Day 57</option>
+                                        <option value="58">Day 58</option>
+                                        <option value="59">Day 59</option>
+                                        <option value="60">Day 60</option>
+                                        <option value="61">Day 61</option>
+                                        <option value="62">Day 62</option>
+                                        <option value="63">Day 63</option>
+                                        <option value="64">Day 64</option>
+                                        <option value="65">Day 65</option>
+                                        <option value="66">Day 66</option>
+                                        <option value="67">Day 67</option>
+                                        <option value="68">Day 68</option>
+                                        <option value="69">Day 69</option>
+                                        <option value="70">Day 70</option>
+                                        <option value="71">Day 71</option>
+                                        <option value="72">Day 72</option>
+                                        <option value="73">Day 73</option>
+                                        <option value="74">Day 74</option>
+                                        <option value="75">Day 75</option>
+                                        <option value="76">Day 76</option>
+                                        <option value="77">Day 77</option> 
+                                        <option value="78">Day 78</option>
+                                        <option value="79">Day 79</option>
+                                        <option value="80">Day 80</option>
+                                        <option value="81">Day 81</option>
+                                        <option value="82">Day 82</option>
+                                        <option value="83">Day 83</option>
+                                        <option value="84">Day 84</option>
+                                        <option value="85">Day 85</option>
+                                        <option value="86">Day 86</option>
+                                        <option value="87">Day 87</option>
+                                        <option value="88">Day 88</option>
+                                        <option value="89">Day 89</option>
+                                        <option value="90">Day 90</option>
+                            </select>
+                                </div>
+                                <div class="tableBlock mb-4">
+                                    <table>
+                                        <tr style="text-align: center;">
+                                            <th rowspan="3">Stage</th>
+                                            <th colspan="6">Exercise</th>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                            <th colspan="3">Morning</th>
+                                            <th colspan="3">Evening</th>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                            <th>Repetations</th>
+                                            <th>Steps</th>
+                                            <th>Extra Exercise</th>
+                                            <th>Repetations</th>
+                                            <th>Steps</th>
+                                            <th>Extra Exercise</th>
+                                        </tr>
+                                        <tr style="text-align: center;" *ngFor="let row of healthList">
+                                            <td>{{row.morning_repetions}}</td>
+                                            <td>{{row.morning_steps}}</td>
+                                            <td>{{row.morning_extra}}</td>
+                                            <td>{{row.evening_repetions}}</td>
+                                            <td>{{row.evening_steps}}</td>
+                                            <td>{{row.evening_extra}}</td>
+                                        </tr>
+                                    </table>
+                                    <br/> <br/>
+                                    <table>
+                                        <tr style="text-align: center;">
+                                            <th colspan="5">Food</th>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                            <th>Breakfast</th>
+                                            <th>Pre Lunch Snack</th>
+                                            <th>Lunch</th>
+                                            <th>Evening Snack</th>
+                                            <th>Dinner</th>
+                                        </tr>
+                                        <tr style="text-align: center;" *ngFor="let row of healthList">
+                                            <td>{{row.breakfast}}</td>
+                                            <td>{{row.pre_lunch_snack}}</td>
+                                            <td>{{row.lunch}}</td>
+                                            <td>{{row.evening_snack}}</td>
+                                            <td>{{row.dinner}}</td>
+                                        </tr>
+                                    </table>
+                                    <br/> <br/>
+                                    <table>
+                                        <tr style="text-align: center;">
+                                            <th colspan="7">Medicine</th>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                            <th colspan="3">Tablets</th>
+                                            <th colspan="4">Insulin</th>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                            <th>Morning</th>
+                                            <th>Afternoon</th>
+                                            <th>Evening</th>
+                                            <th>Morning</th>
+                                            <th>Afternoon</th>
+                                            <th>Evening</th>
+                                            <th>Bedtime</th>
+                                        </tr>
+                                        <tr style="text-align: center;" *ngFor="let row of healthList">
+                                            <td>{{row.morning_medicine}}</td>
+                                            <td>{{row.afternoon_medicine}}</td>
+                                            <td>{{row.evening_medicine}}</td>
+                                            <td>{{row.morning_insulin}}</td>
+                                            <td>{{row.afternoon_insulin}}</td>
+                                            <td>{{row.evening_insulin}}</td>
+                                            <td>{{row.bedtime_insulin}}</td>
+                                        </tr>
+                                    </table>
+                                    <br/> <br/>
+                                    <table>
+                                        <tr style="text-align: center;">
+                                            <th>Sugar</th>
+                                            <th>Glucose</th>
+                                            <th>Blood Pressure</th>
+                                        </tr>
+                                        <tr *ngFor="let row of healthList">
+                                            <td>{{row.sugar}}</td>
+                                            <td>{{row.glucose}}</td>
+                                            <td>{{row.blood_pressure}}</td>
+                                        </tr>
+                                    </table>
+                                    <br/> <br/>
+                                    <table>
+                                        <tr style="text-align: center;">
+                                            <th colspan="4">Urine Sugar</th>
+                                        </tr>
+                                        <tr style="text-align: center;">
+                                            <th rowspan="2">Breakfast</th>
+                                            <th rowspan="2">Lunch</th>
+                                        </tr>
+                                        <tr *ngFor="let row of healthList">
+                                            <td>{{row.urinesugar_breakfast}}</td>
+                                            <td>{{row.urinesugar_lunch}}</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <!--<div class="tableBlock mb-4">
+                                <table>
+                                    <tr style="text-align: center;">
+                                        <th colspan="5">Food</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Wakeup snack</th>
+                                        <th>Breakfast</th>
+                                        <th>Forenoon snack</th>
+                                        <th>Lunch</th>
+                                    </tr>
+                                    <tr>
+                                        <td>82</td>
+                                        <td>85</td>
+                                        <td>78</td>
+                                        <td>82</td>
+                                    </tr>
+
+
+                                    <tr style="text-align: center;">
+                                        <th colspan="5">Food</th>
+                                    </tr>
+                                    <tr>
+                                        <th>Afternoon snack</th>
+                                        <th>Dinner</th>
+                                        <th>Bedtime stack</th>
+                                        <th></th>
+                                    </tr>
+                                    <tr>
+                                        <td>82</td>
+                                        <td>85</td>
+                                        <td>78</td>
+                                        <td></td>
+                                    </tr>
+
+
+                                    <tr style="text-align: center;">
+                                        <th colspan="2">Exercise</th>
+                                        <th rowspan="2">Medicine</th>
+                                        <th rowspan="2">FBS</th>
+                                        <th rowspan="2">PPBS</th>
+                                    </tr>
+
+                                    <tr>
+                                        <th>Morning</th>
+                                        <th>Evening</th>
+                                    </tr>
+
+                                    <tr>
+                                        <td>81</td>
+                                        <td>81</td>
+                                        <td>Medicine</td>
+                                        <td>FBS</td>
+                                        <td>PPBS</td>
+                                    </tr>
+                                </table>
+                            </div>-->
+
+                            </div>
+                        </div>
+
+
+                        <div role="tabpanel" class="tab-pane fade" id="patienthistory">
+                            <div class="content">
+                                <div>
+                                    <div class="row mb-2" *ngFor="let rows of notes_list">
+                                        <label for="inputEmail" class="col-sm-3">
+                                            {{rows.date | date:'yyyy-MM-dd' }}
+                                            {{rows.date | date:'h:MM:ss a'}}
+                                        </label>
+                                        <label for="inputEmail" class="col-sm-1">:</label>
+                                        <div class="col-sm-8"> {{rows.notes}} </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-container block2">
+        <div class="col media">
+
+            <div class="tabBlock">
+                <ul class="nav nav-tabs mb-4" role="tablist">
+
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#audio" role="tab" data-toggle="tab" (click)="get_report()">Audio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#documents" role="tab" data-toggle="tab" (click)="get_report()">Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#images" role="tab" data-toggle="tab" (click)="get_report()">Images</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane active" id="audio">
+
+                        <!--<div class="content row" *ngIf="report_avail">
+                            <div class="col-md-4 mb-4">
+                                <div id="photo" (click)="open_file(report)" data-toggle="modal" role="dialog">
+                                    <audio controls controlsList="nodownload">
+                                         <source [src]="report.result_1">
+                                        </audio>
+                                </div>
+                            </div>
+                        </div>-->
+                        <div class="unavailable">
+                            <div class="row">
+                                <div class="col-md-8" *ngFor="let rows of chat_files_audio">
+                                    <div id="photo" (click)="viewFile(rows.path)" data-toggle="modal" role="dialog">
+                                        <!-- <img src="https://via.placeholder.com/22x22"> -->
+                                        <audio controls>
+                                            <source src="{{rows.path}}" type="audio/ogg">
+                                        </audio>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="documents">
+                        <!--<div class="content row" *ngIf="report_avail">
+                            <div class="col-md-4 mb-4" *ngFor="let report of reportList[0].docs">
+                                <div id="photo" (click)="open_file(report)" data-toggle="modal" role="dialog">
+                        <i style="font-size:24px;color: green;" class="fa" *ngIf="report.mime_type=='image/jpeg;'">&#xf03e;</i>
+                        <i style="font-size:24px;color:red" class="fa" *ngIf="report.mime_type=='application/pdf;'">&#xf1c1;</i>
+                        <span></span>
+                    </div>
+                </div>
+            </div>-->
+                        <div class="unavailable">
+                            <div class="row">
+                                <div class="col-md-3" *ngFor="let rows of chat_files_document">
+                                    <div id="photo" (click)="viewFile(rows.path)" data-toggle="modal" role="dialog">
+                                        <!-- <img src="https://via.placeholder.com/22x22"> -->
+                                        <i style="font-size:24px;color:red" class="fa">&#xf1c1;</i>
+                                        <span>File</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div role="tabpanel" class="tab-pane fade" id="images">
+                        <div class="row">
+                            <div class="col-md-3" *ngFor="let rows of chat_files_images">
+                                <img src="{{rows.path}}" (click)="viewFile(rows.path)" width="100" height="100"> <br/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col links">
+            <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <div class="form-group">
+                  <select class="form-control" name="type" (change)="onTypeChange($event.target.value)" [(ngModel)]="linkTypes">
+                    <option value="" disabled>Select Type</option>
+                    <option value="images">Images</option>
+                    <option value="documents">Documents</option>
+                    <option value="videos">App Videos</option>
+                    <option value="youtubeVideos">Youtube Videos</option>
+                  </select>
+                 </div>
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+            <table class="table table-borderless">
+                <tbody *ngIf="isImages">
+                    <tr *ngFor="let rows of allImages">
+                        <td>
+                            <img src="{{rows.links}}" height="50px" width="50px">
+                        </td>
+                        <td>
+                            <label>{{rows.title}}</label>
+                        </td>
+                        <td>
+                            <button (click)="sendLinkImage(rows.links)">Send</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="isDocuments">
+                    <tr *ngFor="let rows of allDocuments">
+                        <td>
+                            <div style="cursor: pointer;" id="photo" (click)="viewFile(rows.path)" data-toggle="modal" role="dialog">
+                                <!-- <img src="https://via.placeholder.com/22x22"> -->
+                                <i style="font-size:24px;color:red" class="fa">&#xf1c1;</i> &nbsp;
+                                <span>File</span>
+                            </div>
+                        </td>
+                        <td>
+                            <label>{{rows.title}}</label>
+                        </td>
+                        <td>
+                            <button (click)="sendLinkDocument(rows.links)">Send</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="isVideos">
+                    <tr *ngFor="let rows of allVideos">
+                        <td>
+                            <img src="{{rows.thumbnail}}" height="50px" width="50px">
+                        </td>
+                        <td>
+                            <label>{{rows.filename}}</label>
+                        </td>
+                        <td>
+                            <button (click)="sendLinkVideo(rows.thumbnail, rows.video_path)">Send</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="isYoutubeVideos">
+                    <tr *ngFor="let rows of allYoutubes">
+                        <td>
+                            <label>{{rows.title}}</label>
+                        </td>
+                        <td>
+                            <button (click)="sendYoutubeLink(rows.url)">Send</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- <ul *ngFor="let link of user_resources;index as i ">
+        <li>{{i+1}}. {{link.links}}</li>
+      </ul> -->
+
+            <!-- <div *ngFor="let link of user_resources">
+        <p>{{link.links}}</p>
+        <div class="col"> {{link.links}}</div>
+        <div class="col"></div>
+        <div class="col"> <button>Send</button></div>
+      </div> -->
+        </div>
+
+
+    </div>
+
+    <div id="cameraModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Capture Image</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <video #video class="vid" autoplay></video>
+                <canvas #canvas class="vid"></canvas>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" (click)="capture()">Capture</button>
+              <button *ngIf="imageCaptured" type="button" class="btn btn-primary" data-dismiss="modal" (click)="sendCaptureImage()">Send</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="voiceModal" class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Record Voice</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+                <audio controls="" *ngIf="url">
+                     <source [src]="sanitize(url)" type="audio/wav">
+                    </audio>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" *ngIf="!recording" (click)="initiateRecording()">Start</button>
+              <button type="button" class="btn btn-primary" *ngIf="recording" (click)="stopRecording()">Stop</button>
+              <button *ngIf="voiceRecorded" type="button" class="btn btn-primary" data-dismiss="modal" (click)="sendRecordedAudio()">Send</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>

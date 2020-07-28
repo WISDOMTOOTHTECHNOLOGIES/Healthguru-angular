@@ -1,0 +1,20 @@
+<nav id="sidebar" class="navbar-light" [ngClass]="{'hidden': sideNavService.hideSideNav }">
+  <div style="margin-top: 35%">
+    <div *ngFor="let item of commonservice.menuListItems;let i=index" class="listBlock">
+      <span *ngIf="!isArray(item)" [ngClass]="{'check': selectedItem == item}" [class.inside]="selectedItem"
+        (click)="listClick(item)">
+        {{item}}
+      </span>
+      <span *ngIf="isArray(item)" [ngClass]="{'check': selectedItem == item}" [class.inside]="selectedItem">
+        <a class="submenu-link" href="#{{item[0].split(' ').join('')}}" data-toggle="collapse" aria-expanded="false">
+          {{item[0]}}
+        </a>
+        <ul class="collapse list-unstyled" id="{{item[0].split(' ').join('')}}">
+          <span *ngFor="let it of item | slice: 1" class="submenu-item" [ngClass]="{'check': selectedItem == it}" [class.inside]="selectedItem" (click)="listClick(it)">
+            {{it}} <br>
+          </span> 
+        </ul>
+        </span> 
+    </div>
+  </div>
+</nav> 

@@ -1,0 +1,124 @@
+<div class="container px-4">
+
+    <div class="row rounded-lg overflow-hidden shadow">
+        <!-- Users box-->
+        <div class="col-6 px-0">
+            <div *ngIf="chatUsersList" class="bg-white">
+
+                <div class="bg-gray px-4 py-2 bg-light">
+                    <p class="h5 mb-0 py-1">Chat List</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <input class="form-control" type="search" id="search1" placeholder="search user" (input)="onSearchChange($event.target.value)">
+                    </div>
+                </div>
+ 
+
+                <div class="messages-box">
+                    <div class="list-group rounded-0">
+                        <div *ngFor="let rows of searchUserData">
+                            <a *ngIf="rows.unread_msg > 0" style="background-color: #FF9999;" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                                 <div class="media" (click)="user_chat(rows.phone_num, rows.count)">
+                                    <img *ngIf="rows.image_path === null" src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" class="rounded-circle">
+                                    <img *ngIf="!(rows.image_path === null)" src="{{rows.user_image}}" alt="user" class="rounded-circle">
+                                    <div class="media-body ml-4">
+                                        <div class="d-flex align-items-center justify-content-between mb-1">
+                                            <h6 class="mb-0">{{rows.user_name}}</h6> <br>
+                                            <span *ngIf="rows.unread_msg != '0'" class="badge badge-green badge-corner radius-3">{{rows.unread_msg}}</span>
+                                            <!--<small class="small font-weight-bold">14 Dec</small>-->
+                                        </div>
+                                        <p *ngIf="rows.type == 'message'" class="font-italic text-muted mb-0 text-small">{{rows.message}}</p>
+                                        <div *ngIf="rows.type == 'pdf'" id="photo" data-toggle="modal" role="dialog">
+                                            <!-- <img src="https://via.placeholder.com/22x22"> -->
+                                            <i style="font-size:24px;color:red" class="fa">&#xf1c1;</i> File
+                                        </div>
+                                        <a *ngIf="rows.type == 'link'" class="link-msg" >{{rows.message}}</a>
+                                        <audio *ngIf="rows.type == 'audio'" controls controlsList="nodownload">
+                                          <source [src]="rows.message">
+                                        </audio> 
+                                        <div class="row" *ngIf="rows.type == 'broadcast'">
+                                            <div class="col-md-12">
+                                                {{rows.message}}
+                                                {{rows.message.username}}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <a *ngIf="(rows.unread_msg == 0)" style="background-color: #99FF99;" class="list-group-item list-group-item-action list-group-item-light rounded-0">
+                                <div class="media" (click)="user_chat(rows.phone_num, rows.count)">
+                                   <img *ngIf="rows.image_path === null" src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" class="rounded-circle">
+                                   <img *ngIf="!(rows.image_path === null)" src="{{rows.user_image}}" alt="user" class="rounded-circle">
+                                   <div class="media-body ml-4">
+                                       <div class="d-flex align-items-center justify-content-between mb-1">
+                                           <h6 class="mb-0">{{rows.user_name}}</h6> <br>
+                                           <span *ngIf="rows.unread_msg != '0'" class="badge badge-green badge-corner radius-3">{{rows.unread_msg}}</span>
+                                           <!--<small class="small font-weight-bold">14 Dec</small>-->
+                                       </div>
+                                       <p *ngIf="rows.type == 'message'" class="font-italic text-muted mb-0 text-small">{{rows.message}}</p>
+                                       <div *ngIf="rows.type == 'pdf'" id="photo" data-toggle="modal" role="dialog">
+                                           <!-- <img src="https://via.placeholder.com/22x22"> -->
+                                           <i style="font-size:24px;color:red" class="fa">&#xf1c1;</i> File
+                                       </div>
+                                       <a *ngIf="rows.type == 'link'" class="link-msg" >{{rows.message}}</a>
+                                       <audio *ngIf="rows.type == 'audio'" controls controlsList="nodownload">
+                                         <source [src]="rows.message">
+                                       </audio> 
+                                       <div class="row" *ngIf="rows.type == 'broadcast'">
+                                           <div class="col-md-12">
+                                               {{rows.message}}
+                                               {{rows.message.username}}
+                                           </div>
+                                       </div>
+                                   </div>
+                               </div>
+                           </a>
+                        </div>
+                    </div>
+                </div>
+
+                <a class="float" title="Show all users" data-toggle="modal" (click)="showAllUsers()" data-target="#exampleModal">
+                    <i class="fa fa-plus my-float"></i>
+                </a>
+            </div>
+
+            <div *ngIf="allUsersList" class="bg-white">
+
+                <div class="bg-gray px-4 py-2 bg-light">
+                    <p class="h5 mb-0 py-1">Users List</p>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <input class="form-control" type="search" id="search1" placeholder="search user" (input)="onSearchAllUsersChange($event.target.value)">
+                    </div>
+                </div>
+ 
+                <div class="messages-box">
+                    <div class="list-group rounded-0">
+                        <a class="list-group-item list-group-item-action list-group-item-light rounded-0" *ngFor="let rows of searchAllUserData">
+                             <div class="media" (click)="user_chat(rows.phone_num, rows.count)">
+                                <img *ngIf="rows.image_path === null" src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg" alt="user" class="rounded-circle">
+                                <img *ngIf="!(rows.image_path === null)" src="{{rows.user_image}}" alt="user" class="rounded-circle">
+                                <div class="media-body ml-4">
+                                    <div class="d-flex align-items-center justify-content-between mb-1">
+                                        <h6 class="mb-0">{{rows.user_name}}</h6> <br>
+                                        <!--<span *ngIf="rows.unread_msg != '0'" class="badge badge-green badge-corner radius-3">{{rows.unread_msg}}</span>
+                                        <small class="small font-weight-bold">14 Dec</small>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <a class="float" title="Show chat users" data-toggle="modal" (click)="showChatUsers()" data-target="#exampleModal">
+                    <i class="fa fa-minus my-float"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
+</div>

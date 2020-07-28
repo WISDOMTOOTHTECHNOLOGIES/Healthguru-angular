@@ -1,0 +1,19 @@
+.navbar {
+  box-shadow: 0 4px 6px -6px #222;
+  background: white;
+}
+
+.profile {
+  outline: none;
+
+  .fa {
+    margin-right: 10px;
+  }
+
+  span {
+    font-size: 1em;
+    font-weight: 500;
+    color: #0992A5;
+    margin-right: 10px;
+  }
+}

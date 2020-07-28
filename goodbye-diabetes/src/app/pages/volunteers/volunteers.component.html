@@ -1,0 +1,245 @@
+<div class="container">
+  <div class="row">
+      <div class="col-4">
+          <button class="btn btn-success btn-round m1-auto" data-toggle="modal" data-target="#exampleModalCenter"><i
+                class="fa fa-plus"></i>Add Volunteer</button>
+          <!-- The Modal -->
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header bg-success">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Add Volunteer</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control" placeholder="Name" value="" [(ngModel)]="name" />
+                                  </div>
+                                  <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Age" value="" [(ngModel)]="age" />
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Email" value="" [(ngModel)]="emailId" />
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                    <select class="form-control" [(ngModel)]="gender" placeholder="Gender">
+                                        <option [value]="1">Select Gender </option>
+                                        <option value="male">male</option>
+                                        <option value="female">female</option>
+                                    </select>
+                                  </div>
+                                  <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Phone" value="" [(ngModel)]="phone_num" />
+                                </div>
+                                <div class="form-group">
+                                    <select class="form-control" [(ngModel)]="languages">
+                                        <option [value]="1" disabled>Select Language </option>
+                                        <option *ngFor="let row of allLanguages" value="{{row.language}}">
+                                            {{row.language}}
+                                        </option>
+                                    </select>
+                                    <!--<input type="text" class="form-control" placeholder="Languages seperate languages by comma" value="" [(ngModel)]="languages" />-->
+                                </div>
+                              </div>
+                              <!--<div class="col-md-12">
+                                  <span class="input-title">Languages</span>
+                                  <div class="row">
+                                      <div class="col-sm-4">
+                                          <div class="form-control" style="margin-bottom: 10px;">
+                                               <input type="checkbox" id="language1" name="language1" value="English">
+                                        <label for="labguage1">English</label>
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <div class="form-control" style="margin-bottom: 10px;">
+                                               <input type="checkbox" id="language2" name="language2" value="Hindi">
+                                        <label for="labguage2">Hindi</label>
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <div class="form-control" style="margin-bottom: 10px;">
+                                            <input type="checkbox" id="language2" name="language2" value="Hindi">
+                                            <label for="labguage2">Hindi</label>
+                                          </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                          <div class="form-control" style="margin-bottom: 10px;">
+                                            <input type="checkbox" id="language3" name="language3" value="Malayalam">
+                                            <label for="labguage3">Malayalam</label>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>-->
+                              <div class="col-md-12">
+                                <span class="input-title">Services Offered</span>
+                                <div class="form-group">
+                                    <textarea class="form-control" placeholder="Services Offered" [(ngModel)]="servicesOffered">
+
+                                    </textarea>
+                                </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="addVolunteers()">SAVE</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" [ngStyle]="{'display':display}">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header bg-success">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Edit Volunteer</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Name" value="" [(ngModel)]="editName" />
+                                </div>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" placeholder="Age" value="" [(ngModel)]="editAge" />
+                              </div>
+                              <div class="form-group">
+                                  <input type="text" class="form-control" placeholder="Email" value="" [(ngModel)]="editEmailId" />
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <select class="form-control" [(ngModel)]="editGender" placeholder="Gender">
+                                      <option value="" disabled selected="true">Select Gender</option>
+                                      <option value="male">male</option>
+                                      <option value="female">female</option>
+                                  </select>
+                                </div>
+                                <div class="form-group">
+                                  <input type="text" class="form-control" placeholder="Phone" value="" [(ngModel)]="editPhone_num" />
+                              </div>
+                              <div class="form-group">
+                                  <input type="text" class="form-control" placeholder="Languages seperate languages by comma" value="" [(ngModel)]="editLanguages" />
+                              </div>
+                            </div>
+                            <!--<div class="col-md-12">
+                                <span class="input-title">Languages</span>
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <div class="form-control" style="margin-bottom: 10px;">
+                                             <input type="checkbox" id="language1" name="language1" value="English">
+                                      <label for="labguage1">English</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-control" style="margin-bottom: 10px;">
+                                             <input type="checkbox" id="language2" name="language2" value="Hindi">
+                                      <label for="labguage2">Hindi</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-control" style="margin-bottom: 10px;">
+                                          <input type="checkbox" id="language2" name="language2" value="Hindi">
+                                          <label for="labguage2">Hindi</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <div class="form-control" style="margin-bottom: 10px;">
+                                          <input type="checkbox" id="language3" name="language3" value="Malayalam">
+                                          <label for="labguage3">Malayalam</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>-->
+                            <div class="col-md-12">
+                              <span class="input-title">Services Offered</span>
+                              <div class="form-group">
+                                  <textarea class="form-control" placeholder="Services Offered" [(ngModel)]="editServicesOffered">
+
+                                  </textarea>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                          <button (click)="updateVolunteer()" type="button" data-dismiss="modal" class="btn btn-success">SAVE</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" [ngStyle]="{'display':display}">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h5 class="modal-title" style="color: white;" id="exampleModalLongTitle">Delete Volunteer</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Are you sure you want to delete this volunteer?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+                        <button (click)="confirmDeleteVolunteer()" type="button" class="btn btn-danger">DELETE</button>
+                        <button #btnCloseDelete class="btn-hidden" type="button" data-dismiss="modal"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button #btnDelete class="btn-hidden" type="button" data-toggle="modal" data-target="#exampleModalCenter3"></button>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-12">
+          <table class="table table-borderless">
+              <thead>
+                  <tr>
+                      <!--<th>ID</th>-->
+                      <th>NAME</th>
+                      <th>GENDER</th>
+                      <th>AGE</th>
+                      <th>PHONE</th>
+                      <th>EMAIL</th>
+                      <th>LANGUAGE</th>
+                      <th>SERVICES OFFERED</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody *ngIf="noVolunteers" class="nodata">
+                
+              </tbody>
+              <tbody *ngIf="!noVolunteers" class="bg-white1">
+                  <tr *ngFor="let row of allVolunteers">
+                      <!--<td>{{row.id}}</td>-->
+                      <td>{{row.name}}</td>
+                      <td>{{row.gender}}</td>
+                      <td>{{row.age}}</td>
+                      <td>{{row.phone_num}}</td>
+                      <td>{{row.emailID}}</td>
+                      <td>{{row.language}}</td>
+                      <td>{{row.servicre_offered}}</td>
+                      <td> 
+                          <div class="row">
+                            <button class="btn btn-info" title="Edit" data-toggle="modal" data-target="#exampleModalCenter2" (click)="editVolunteer(row.phone_num)"><i class="fa fa-edit"></i></button>
+                            <button class="btn btn-danger" title="Delete" (click)="deleteVolunteer(row.phone_num)">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                          </div>
+                    </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>

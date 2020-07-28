@@ -1,0 +1,38 @@
+<div class="split">
+
+    <p>Welcome To <br> HEALTH GURU</p>
+    <div class="centered">
+        <div *ngIf="errMsg" class="alert alert-danger alert-dismissible">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a> {{showError}}
+        </div>
+        <img src="assets/logo.png" />
+        <!-- Login Banner-->
+        <div class="UserForm mb-3">
+
+            <form [formGroup]="userForm" class="inputContent">
+                <div class="form-group mb-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control transparent-input" formControlName="email" placeholder="Email Id" value="9344057265">
+                    </div>
+                    <small class="validationMsg" *ngIf="userForm.get('email').hasError('required') && userForm.get('email').touched"> Enter Email Id
+          </small>
+                </div>
+                <div class="form-group mb-4">
+                    <div class="input-group">
+
+                        <input type="password" class="form-control transparent-input" formControlName="password" placeholder="Password" value="admin">
+                    </div>
+                    <small class="validationMsg" *ngIf="userForm.get('password').hasError('required') && userForm.get('password').touched"> Enter password
+          </small>
+                </div>
+                <button type="submit" [disabled]="!userForm.valid" class="sign" (click)="login()">LOGIN</button>
+                <!--<p class="forgot" (click)="forgot()"><u>Forgot Password?</u><span *ngIf="contact">Contact admin</span></p>
+                <p *ngIf="errMsg" class="forgot errormsg">{{showError}} </p>-->
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Spinner view -->
+<ngx-spinner bdColor="rgba(51,51,51,0.8)" size="medium" color="#0062cc" type="ball-clip-rotate">
+    <p style="font-size: 20px; color: white">Loading...</p>
+</ngx-spinner>

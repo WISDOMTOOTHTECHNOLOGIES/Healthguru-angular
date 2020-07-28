@@ -1,0 +1,474 @@
+<div class="container">
+  <div *ngIf="isShow">
+    <span class="back" (click)="user_list()"><i class="fa fa-arrow-left"></i> <u>Back</u></span>
+    <br/>
+    <div class="tabBlock">
+        <ul class="nav nav-tabs mb-4" role="tablist">
+  
+            <li class="nav-item">
+                <a class="nav-link active" href="#profile" role="tab" data-toggle="tab">Profile</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#healthdata" role="tab" data-toggle="tab">Health Data</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#reports" role="tab" data-toggle="tab" (click)="get_report()">Reports</a>
+            </li>
+        </ul>
+        <div class="tab-content" *ngIf="userProfile">
+            <div role="tabpanel" class="tab-pane active" id="profile">
+                <div class="content">
+                    <div class="unavailable"></div>
+                    <div>
+                        <div class="row">
+                            <div class="col-md-3">
+                                <div class="avatar-upload">
+                                    <div class="avatar-preview">
+                                        <img id="imagePreview" [src]="userProfile.user_image" *ngIf="isImage">
+                                        <img id="imagePreview" src="assets/profile-img.jpg" *ngIf="!isImage">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-9">
+                                <div class="row mb-2">
+                                    <label for="inputEmail" class="col-sm-4">Name</label>
+                                    <label for="inputEmail" class="col-sm-1">:</label>
+                                    <div class="col-sm-7">{{userProfile.user_name}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label for="inputEmail" class="col-sm-4">Patient Id</label>
+                                    <label for="inputEmail" class="col-sm-1">:</label>
+                                    <div class="col-sm-7">{{userProfile.patient_id}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label for="inputEmail" class="col-sm-4">Age</label>
+                                    <label for="inputEmail" class="col-sm-1">:</label>
+                                    <div class="col-sm-7"> {{userProfile.user_age}} </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label for="inputEmail" class="col-sm-4">Gender</label>
+                                    <label for="inputEmail" class="col-sm-1">:</label>
+                                    <div class="col-sm-7">{{userProfile.user_gender}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label for="inputEmail" class="col-sm-4">Country</label>
+                                    <label for="inputEmail" class="col-sm-1">:</label>
+                                    <div class="col-sm-7">{{userProfile.user_country}} </div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label for="inputEmail" class="col-sm-4">Phone</label>
+                                    <label for="inputEmail" class="col-sm-1">:</label>
+                                    <div class="col-sm-7"> {{userProfile.phone_num}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label for="inputEmail" class="col-sm-4">Email ID</label>
+                                    <label for="inputEmail" class="col-sm-1">:</label>
+                                    <div class="col-sm-7"> {{userProfile.user_emailID}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label for="inputEmail" class="col-sm-4">Date of joining reversal
+                                        programme</label>
+                                    <label for="inputEmail" class="col-sm-1">:</label>
+                                    <div class="col-sm-7">{{userProfile.user_joiningdate | date:'yyyy-MM-dd'}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label for="inputEmail" class="col-sm-4">Patient Type</label>
+                                    <label for="inputEmail" class="col-sm-1">:</label>
+                                    <div class="col-sm-7">{{userProfile.category}}</div>
+                                </div>
+                                <div class="row mb-2">
+                                    <label for="inputEmail" class="col-sm-4"> Days </label>
+                                    <label for="inputEmail" class="col-sm-1">:</label>
+                                    <div class="col-sm-7">{{userProfile.day}}</div>
+                                </div>
+                                <!--<div class="row mb-2">
+                                    <label for="inputEmail" class="col-sm-4"> Joining reversal programme through
+                                        app</label>
+                                    <label for="inputEmail" class="col-sm-1">:</label>
+                                    <div class="col-sm-7"></div>
+                                </div>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="healthdata">
+                <div class="content">
+                    <!-- <p class="unavailable">Health data is unavailable</p> -->
+                    <div class="selectBlock mb-2">
+                        <span>Select Day </span>
+                        <select #healthDays (change)='onHealthDayChange(healthDays.value)'>
+                            <option value="1">Day 1</option>
+                            <option value="2">Day 2</option>
+                            <option value="3">Day 3</option>
+                            <option value="4">Day 4</option>
+                            <option value="5">Day 5</option>
+                            <option value="6">Day 6</option>
+                            <option value="7">Day 7</option>
+                            <option value="8">Day 8</option>
+                            <option value="9">Day 9</option>
+                            <option value="10">Day 10</option>
+                            <option value="11">Day 11</option>
+                            <option value="12">Day 12</option>
+                            <option value="13">Day 13</option>
+                            <option value="14">Day 14</option>
+                            <option value="15">Day 15</option>
+                            <option value="16">Day 16</option>
+                            <option value="17">Day 17</option>
+                            <option value="18">Day 18</option>
+                            <option value="19">Day 19</option>
+                            <option value="20">Day 20</option>
+                            <option value="21">Day 21</option>
+                            <option value="22">Day 22</option>
+                            <option value="23">Day 23</option>
+                            <option value="24">Day 24</option>
+                            <option value="25">Day 25</option>
+                            <option value="26">Day 26</option>
+                            <option value="27">Day 27</option>
+                            <option value="28">Day 28</option>
+                            <option value="29">Day 29</option>
+                            <option value="30">Day 30</option>
+                            <option value="31">Day 31</option>
+                            <option value="32">Day 32</option>
+                            <option value="33">Day 33</option>
+                            <option value="34">Day 34</option>
+                            <option value="35">Day 35</option>
+                            <option value="36">Day 36</option>
+                            <option value="37">Day 37</option>
+                            <option value="38">Day 38</option>
+                            <option value="39">Day 39</option>
+                            <option value="40">Day 40</option>
+                            <option value="41">Day 41</option>
+                            <option value="42">Day 42</option>
+                            <option value="43">Day 43</option>
+                            <option value="44">Day 44</option>
+                            <option value="45">Day 45</option>
+                            <option value="46">Day 46</option>
+                            <option value="47">Day 47</option>
+                            <option value="48">Day 48</option>
+                            <option value="49">Day 49</option>
+                            <option value="50">Day 50</option>
+                            <option value="51">Day 51</option>
+                            <option value="52">Day 52</option>
+                            <option value="53">Day 53</option>
+                            <option value="54">Day 54</option>
+                            <option value="55">Day 55</option>
+                            <option value="56">Day 56</option>
+                            <option value="57">Day 57</option>
+                            <option value="58">Day 58</option>
+                            <option value="59">Day 59</option>
+                            <option value="60">Day 60</option>
+                            <option value="61">Day 61</option>
+                            <option value="62">Day 62</option>
+                            <option value="63">Day 63</option>
+                            <option value="64">Day 64</option>
+                            <option value="65">Day 65</option>
+                            <option value="66">Day 66</option>
+                            <option value="67">Day 67</option>
+                            <option value="68">Day 68</option>
+                            <option value="69">Day 69</option>
+                            <option value="70">Day 70</option>
+                            <option value="71">Day 71</option>
+                            <option value="72">Day 72</option>
+                            <option value="73">Day 73</option>
+                            <option value="74">Day 74</option>
+                            <option value="75">Day 75</option>
+                            <option value="76">Day 76</option>
+                            <option value="77">Day 77</option> 
+                            <option value="78">Day 78</option>
+                            <option value="79">Day 79</option>
+                            <option value="80">Day 80</option>
+                            <option value="81">Day 81</option>
+                            <option value="82">Day 82</option>
+                            <option value="83">Day 83</option>
+                            <option value="84">Day 84</option>
+                            <option value="85">Day 85</option>
+                            <option value="86">Day 86</option>
+                            <option value="87">Day 87</option>
+                            <option value="88">Day 88</option>
+                            <option value="89">Day 89</option>
+                            <option value="90">Day 90</option>
+                        </select>
+                    </div>
+                    <div class="tableBlock mb-4">
+                        <table>
+                            <tr style="text-align: center;">
+                                <th rowspan="3" style="text-align: center;">Stage</th>
+                                <th colspan="6" style="text-align: center;">Exercise</th>
+                                <th colspan="5" style="text-align: center;">Food</th>
+                                <th colspan="7" style="text-align: center;">Medicine</th>
+                                <th rowspan="3" style="text-align: center;">Sugar Intake</th>
+                                <th rowspan="3" style="text-align: center;">Glucose Intake</th>
+                                <th rowspan="3" style="text-align: center;">Blood Pressure</th>
+                                <th colspan="4" style="text-align: center; border: 1px solid black;">Urine Sugar</th>
+                            </tr>
+                            <tr>
+                                <th colspan="3" style="text-align: center;">Morning</th>
+                                <th colspan="3" style="text-align: center;">Evening</th>
+                                <th rowspan="2" style="text-align: center;">Breakfast</th>
+                                <th rowspan="2" style="text-align: center;">Pre Lunch Snack</th>
+                                <th rowspan="2" style="text-align: center;">Lunch</th>
+                                <th rowspan="2" style="text-align: center;">Evening Snack</th>
+                                <th rowspan="2" style="text-align: center;">Dinner</th>
+                                <th colspan="3" style="text-align: center;">Tablets</th>
+                                <th colspan="4" style="text-align: center;">Insulin</th>
+                                <th rowspan="2" style="text-align: center;">Breakfast</th>
+                                <th rowspan="2" style="text-align: center;  border: 1px solid black;">Lunch</th>
+                            </tr>
+                            <tr>
+                                <th style="text-align: center;">Repetitions</th>
+                                <th style="text-align: center;">Steps</th>
+                                <th style="text-align: center;">Extra Exercise</th>
+                                <th style="text-align: center;">Repetations</th>
+                                <th style="text-align: center;">Steps</th>
+                                <th style="text-align: center;">Extra Exercise</th>
+                                <th style="text-align: center;">Morning</th>
+                                <th style="text-align: center;">Afternoon</th>
+                                <th style="text-align: center;">Evening</th>
+                                <th style="text-align: center;">Morning</th>
+                                <th style="text-align: center;">Afternoon</th>
+                                <th style="text-align: center;">Evening</th>
+                                <th style="text-align: center;">Bedtime</th>
+                            </tr>
+                            <tr *ngFor="let row of healthList">
+                                <td>{{row.stage}}</td>
+                                <td>{{row.morning_repetions}}</td>
+                                <td>{{row.morning_steps}}</td>
+                                <td>{{row.morning_extra}}</td>
+                                <td>{{row.evening_repetions}}</td>
+                                <td>{{row.evening_steps}}</td>
+                                <td>{{row.evening_extra}}</td>
+                                <td>{{row.breakfast}}</td>
+                                <td>{{row.pre_lunch_snack}}</td>
+                                <td>{{row.lunch}}</td>
+                                <td>{{row.evening_snack}}</td>
+                                <td>{{row.dinner}}</td>
+                                <td>{{row.morning_medicine}}</td>
+                                <td>{{row.afternoon_medicine}}</td>
+                                <td>{{row.evening_medicine}}</td>
+                                <td>{{row.morning_insulin}}</td>
+                                <td>{{row.afternoon_insulin}}</td>
+                                <td>{{row.evening_insulin}}</td>
+                                <td>{{row.bedtime_insulin}}</td>
+                                <td>{{row.sugar}}</td>
+                                <td>{{row.glucose}}</td>
+                                <td>{{row.blood_pressure}}</td>
+                                <td>{{row.urinesugar_breakfast}}</td>
+                                <td>{{row.urinesugar_lunch}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="notelist">
+                                <p class="mb-2"><u>Notes About Treatment</u></p>
+                                <accordion [isAnimated]="true">
+                                    <accordion-group *ngFor="let menu of notes_list;let i=index" class="mb-3">
+                                        <button class="btn btn-link btn-block clearfix" accordion-heading type="button" (click)="open_note(i)">
+                                            <div class="pull-left float-left">
+                                                {{menu.date |  date:'dd-MM-yyyy'}}
+                                            </div>
+                                            <div class="pull-left float-left date">
+                                                
+                                            </div>
+                                            <div>
+                                                <i class="fa float-right pull-right"
+                                                    [ngClass]="i==getId ? 'fa-chevron-up': 'fa-chevron-down'"
+                                                    aria-hidden="true"></i></div>
+                                        </button>
+                                        <!-- <div> -->
+                                        <textarea class="form-control" rows="3" readonly>
+                                            {{menu.notes}}
+                                        </textarea>
+  
+                                        <div class="row">&nbsp;</div>
+                                        <!-- <button class="btn btn-info " style="float: right;">SAVE</button> -->
+                                        <!-- </div> -->
+                                    </accordion-group>
+                                </accordion>
+                            </div>
+                            <!-- Add note fab icon -->
+                            <a class="float" title="Add note" data-toggle="modal" (click)="openNoteModal()" data-target="#exampleModal">
+                                <i class="fa fa-plus my-float"></i>
+                            </a>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="notelist">
+                                <p class="mb-2" routerLink="/questionnaire/{{select_user}}"><u>Questionnaire</u></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="reports">
+                <div class="content row" *ngIf="report_avail">
+                    <div class="col-md-4 mb-4" *ngFor="let report of userReports">
+                        <div id="photo" (click)="open_file(report.path)" data-toggle="modal" role="dialog">
+                            <!--<img src="https://via.placeholder.com/22x22">-->
+                            <i style="font-size:24px;color: green;" class="fa" *ngIf="!(report.mime_type=='application/pdf;')">&#xf03e;</i>
+                            <i style="font-size:24px;color:red" class="fa" *ngIf="report.mime_type=='application/pdf;'">&#xf1c1;</i>
+                            <span>File</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="content nodata" *ngIf="!report_avail">
+                    <span> <b>No Reports Available</b></span>
+                </div>
+                <!--<div class="row" *ngIf="report_avail">
+                    <div class="col-md-6">
+                        <span>From Date</span>
+                        <input type="date" class="form-control" />
+                    </div>
+                    <div class="col-md-6">
+                        <span>To Date</span>
+                        <input type="date" class="form-control" />
+                    </div>
+  
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>FILE NAME</th>
+                            </tr>
+                        </thead>
+                        <tbody class="nodata"> </tbody>
+                        <tbody class="bg-white1">
+                            <tr *ngFor="let rows of userReports">
+                                <td>{{rows.date}}</td>
+                                <td>{{rows.path}}</td>
+                            </tr>
+  
+                        </tbody>
+                    </table>
+  
+                </div>-->
+                <hr>
+                <h1 style="color: #4b7576;font-size: 14px;"><b>Patient Portal Report</b></h1>
+                <div class="content">
+                    <!-- <p class="unavailable">Health data is unavailable</p> -->
+                    <div class="selectBlock mb-2">
+                        <span>Select Day </span>
+                        <select #portalDays (change)='onPortalReportDayChange(portalDays.value)'>
+                            <option value="0">Day 0</option>
+                            <option value="32">Day 32</option>
+                            <option value="64">Day 64</option>
+                            <option value="90">Day 90</option>
+                        </select>
+                    </div>
+                    <div class="tableBlock mb-4" *ngIf="portalTable">
+                        <table>
+                            <tr style="text-align: center;">
+                                <th rowspan="2">FBS</th>
+                                <th rowspan="2">FASTING URINE SUGAR</th>
+                                <th colspan="2">PPBS</th>
+                                <th colspan="2">URINE SUGAR</th>
+                                <th rowspan="2">HbA1c</th>
+                                <th rowspan="2">INSULIN ASSAY</th>
+                                <th rowspan="2">HOMA</th>
+                                <th rowspan="2">TOTAL CHOLESTEROL</th>
+                                <th rowspan="2">HDL</th>
+                                <th rowspan="2">LDL</th>
+                                <th rowspan="2">VLDL</th>
+                                <th rowspan="2">TRIGLYCERIDES</th>
+                                <th rowspan="2">SGPT</th>
+                                <th rowspan="2">SGOT</th>
+                                <th rowspan="2">SERUM CREATININE</th>
+                                <th rowspan="2">%B</th>
+                                <th rowspan="2">T3</th>
+                                <th rowspan="2">T4</th>
+                                <th rowspan="2">TSH</th>
+                                <th rowspan="2">BP</th>
+                                <th rowspan="2">ABDOMEN CIRCUMFERENCE</th>
+                                <th rowspan="2">WEIGHT</th>
+                            </tr>
+                            <tr>
+                                <th>2 Hours After Breakfast</th>
+                                <th>2 Hours After Lunch</th>
+                                <th>2 Hours After Breakfast</th>
+                                <th>2 Hours After Lunch</th>
+                            </tr>
+                            <tr *ngFor="let rows of portalReport">
+                                <td>{{rows.fbs}}</td>
+                                <td>{{rows.fasting_urine_sugar}}</td>
+                                <td>{{rows.ppbs_breakfast}}</td>
+                                <td>{{rows.ppbs_lunch}}</td>
+                                <td>{{rows.urinesugar_breakfast}}</td>
+                                <td>{{rows.urinesugar_lunch}}</td>
+                                <td>{{rows.hba1c}}</td>
+                                <td>{{rows.insulin_assay}}</td>
+                                <td>{{rows.homa_ir_index}}</td>
+                                <td>{{rows.total_cholestrol}}</td>
+                                <td>{{rows.hdl}}</td>
+                                <td>{{rows.ldl}}</td>
+                                <td>{{rows.vldl}}</td>
+                                <td>{{rows.triglycerides}}</td>
+                                <td>{{rows.sgpt}}</td>
+                                <td>{{rows.sgot}}</td>
+                                <td>{{rows.serum}}</td>
+                                <td>{{rows.b}}</td>
+                                <td>{{rows.t3}}</td>
+                                <td>{{rows.t4}}</td>
+                                <td>{{rows.tsh}}</td>
+                                <td>{{rows.bp}}</td>
+                                <td>{{rows.abd_circumfrence}}</td>
+                                <td>{{rows.weight}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="content row" *ngIf="!portalTable">
+                        <div class="col-md-4 mb-4">
+                            <div id="photo" (click)="open_file(portalReport[0].path)" data-toggle="modal" role="dialog">
+                                <!--<img src="https://via.placeholder.com/22x22">-->
+                                <i style="font-size:24px;color: green;" class="fa">&#xf03e;</i>
+                                <!--<i style="font-size:24px;color:red" class="fa" *ngIf="report.mime_type=='application/pdf;'">&#xf1c1;</i>-->
+                                <span></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="backdrop" [ngStyle]="{'display':display}"></div>
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':display}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="onCloseHandled()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body dltmodal-content animate" *ngIf="img_avail">
+                <img [src]="image.link" class="img-container">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Notes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <textarea type="text" class="form-control" placeholder="Notes *" value="" [(ngModel)]="inpNotes">
+                            
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" (click)="saveNotes()" class="btn btn-primary" data-dismiss="modal">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

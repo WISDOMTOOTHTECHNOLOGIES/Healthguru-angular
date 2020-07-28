@@ -1,0 +1,118 @@
+.split {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    overflow-x: hidden;
+    background-image: url(~src/assets/login-bg.png);
+    background-size: cover;
+    background-color: white;
+    background-position: center;
+
+    p {
+        font-size: 1.2em;
+        letter-spacing: 1px;
+        color: #ffff;
+        margin-top: 4%;
+        font-weight: 600;
+        text-align: center;
+    }
+}
+
+.centered {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    background: #1a5e7d;
+    width: 350px;
+    border-radius: 5px;
+
+    .inputContent {
+        margin: 5%;
+    }
+
+    .validationMsg {
+        float: left !important;
+    }
+
+    .forgot {
+        font-size: 1em !important;
+        color: #f8f9fa;
+        font-weight: 500;
+        cursor: pointer;
+        float: left;
+        font-style: oblique;
+
+        span {
+            margin-left: 20px;
+            color: #ffc107;
+        }
+    }
+
+    img {
+        width: 83px;
+        margin-top: 3%;
+    }
+}
+
+.UserForm {
+    .form-control {
+        height: auto !important;
+        font-size: 1.1em !important;
+    }
+
+    .transparent-input {
+        background-color: transparent !important;
+        border-top: none !important;
+        border-right: none !important;
+        border-left: none !important;
+        border: 1px solid #ffffff;
+        outline: none;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        color: white !important;
+    }
+
+    .sign {
+        background-color: white;
+        color: #1c5820;
+        padding: 6px;
+        margin: 8px 0;
+        border: none;
+        cursor: pointer;
+        width: 100%;
+        font-size: 1.2em;
+        border-radius: 6px;
+        outline: none;
+    }
+
+    button[disabled] {
+        background: #b1b0b0;
+        cursor: not-allowed;
+    }
+
+    .errormsg {
+        color: #f59797 !important;
+        padding-top: 32px;
+    }
+}
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #e6e4e4 !important;
+    font-size: 0.9em !important;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #e6e4e4 !important;
+    font-size: 0.9em !important;
+}
+
+::-ms-input-placeholder {
+    /* Microsoft Edge */
+    color: #e6e4e4 !important;
+    font-size: 0.9em !important;
+}

@@ -1,0 +1,117 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-2">
+      <span class="back" (click)="onBack()"><i class="fa fa-arrow-left"></i> <u>Back</u></span>
+    </div>
+    <div class="col-md-8"></div>
+      <div class="col-md-2">
+          <button class="btn btn-success btn-round m1-auto" data-toggle="modal" data-target="#exampleModalCenter"><i
+                class="fa fa-plus"></i>Add Category</button>
+          <!-- The Modal -->
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header bg-success">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Add Category</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control" name="category" placeholder="Name" value="" [(ngModel)]="category" />
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="addCategory()">SAVE</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" [ngStyle]="{'display':display}">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header bg-success">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Edit Event</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control" placeholder="Title Event *" value="" [(ngModel)]="updateTitle" />
+                                  </div>
+                                  <div class="form-group">
+                                      <input type="file" class="form-control" placeholder="" (change)="onEditFileChanged($event)" value="" />
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <input type="text" class="form-control" placeholder="Link Image" value="" [(ngModel)]="updateImage_link" />
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                          <button (click)="updateEvent()" type="button" data-dismiss="modal" class="btn btn-success">SAVE</button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" [ngStyle]="{'display':display}">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-danger">
+                        <h5 class="modal-title" style="color: white;" id="exampleModalLongTitle">Delete Category</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Are you sure you want to delete this category?</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+                        <button (click)="confirmDeleteCategory()" type="button" class="btn btn-danger">DELETE</button>
+                        <button #btnCloseDelete class="btn-hidden" type="button" data-dismiss="modal"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button #btnDelete class="btn-hidden" type="button" data-toggle="modal" data-target="#exampleModalCenter3"></button>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-12">
+          <table class="table table-borderless">
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody class="nodata"> </tbody>
+              <tbody class="bg-white1">
+                  <tr *ngFor="let row of allCategories">
+                      <td>{{row.id}}</td>
+                      <td>{{row.category}}</td>
+                      <td> 
+                        <!--<button class="btn btn-info" title="Edit" data-toggle="modal" data-target="#exampleModalCenter2" (click)="edit_event(row.id)"><i class="fa fa-edit"></i></button>-->
+                        <button class="btn btn-danger" title="Delete" (click)="deleteCategory(row.id)"><i class="fa fa-trash"></i></button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>

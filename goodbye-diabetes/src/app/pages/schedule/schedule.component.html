@@ -1,0 +1,174 @@
+<div class="container">
+  <div class="row">
+      <div class="col-4">
+          <button class="btn btn-success btn-round m1-auto" data-toggle="modal" data-target="#exampleModalCenter"><i
+                class="fa fa-plus"></i> Add Scheduled Upcoming Live</button>
+          <!-- The Modal -->
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header bg-success">
+                          <h5 class="modal-title" id="exampleModalLongTitle">Add Scheduled Upcoming Live</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <input type="text" class="form-control" name="name" placeholder="Doctor Name" value="" [(ngModel)]="name" />
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <input type="file" class="form-control" value="" accept="image/*" (change)="onThumbnailFileChanged($event)" />
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <input type="datetime-local" class="form-control" name="datetime" placeholder="Date and Time" value="" [(ngModel)]="datetime" />
+                              </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <input type="text" class="form-control" name="topic" placeholder="Topic" value="" [(ngModel)]="topic" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <input type="text" class="form-control" name="description" placeholder="Description" value="" [(ngModel)]="description" />
+                          </div>
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="doctorinfo" placeholder="Doctor Info" value="" [(ngModel)]="doctorinfo" />
+                        </div>
+                    </div>
+                        
+                            </div>
+                      </div>
+                      <div class="modal-footer">
+                          <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                          <button type="button" class="btn btn-success" (click)="addLive()">SAVE</button>
+                          <div *ngIf="loading" class="loader"></div>
+                          <button #btnClose class="btn-hidden" type="button" data-dismiss="modal"></button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header bg-success">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Edit Scheduled Upcoming Live</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <input type="text" class="form-control" name="name" placeholder="Doctor Name" value="" [(ngModel)]="editName" />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <input type="file" class="form-control" value="" accept="image/*" (change)="onThumbnailEditFileChanged($event)" />
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                              <input type="datetime-local" class="form-control" name="datetime" value="" [(ngModel)]="editDateTime" />
+                          </div> 
+                      </div>
+                      <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="topic" placeholder="Topic" value="" [(ngModel)]="editTopic" />
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <input type="text" class="form-control" name="description" placeholder="Description" value="" [(ngModel)]="editDescription" />
+                      </div>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="doctorinfo" placeholder="Doctor Info" value="" [(ngModel)]="editDoctor_info" />
+                    </div>
+                </div>
+                    
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">CLOSE</button>
+                        <button type="button" class="btn btn-success" (click)="updateLive()">SAVE</button>
+                        <div *ngIf="editLoading" class="loader"></div>
+                        <button #btnEditClose class="btn-hidden" type="button" data-dismiss="modal"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" [ngStyle]="{'display':display}">
+          <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+              <div class="modal-content">
+                  <div class="modal-header bg-danger">
+                      <h5 class="modal-title" style="color: white;" id="exampleModalLongTitle">Delete Scheduled Upcoming Live</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                      <h6>Are you sure you want to delete this scheduled upcoming live?</h6>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-warning" data-dismiss="modal">CANCEL</button>
+                      <button (click)="confirmDeleteLive()" type="button" class="btn btn-danger">DELETE</button>
+                      <button #btnCloseDelete class="btn-hidden" type="button" data-dismiss="modal"></button>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <button #btnDelete class="btn-hidden" type="button" data-toggle="modal" data-target="#exampleModalCenter3"></button>
+      </div>
+  </div>
+  <div class="row">
+      <div class="col-12">
+          <table class="table table-borderless">
+              <thead>
+                  <tr>
+                      <th>ID</th>
+                      <th>TOPIC</th>
+                      <th>DESCRIPTION</th>
+                      <th>DOCTOR NAME</th>
+                      <th>IMAGE</th>
+                      <th>DATE AND TIME</th>
+                      <th>SPEAKER INFO</th>
+                      <th></th>
+                  </tr>
+              </thead>
+              <tbody class="nodata"> </tbody>
+              <tbody class="bg-white1">
+                  <tr *ngFor="let row of allLives">
+                      <td>{{row.id}}</td>
+                      <td>{{row.topic}}</td>
+                      <td>{{row.description}}</td>
+                      <td>{{row.doctor}}</td>
+                      <td>
+                        <img src="{{row.image}}" height="40px" />
+                      </td>
+                      <td>{{row.date_time}}</td>
+                      <td>{{row.price}}</td>
+                      <td>{{row.doctor_info}}</td>
+                      <td> 
+                        <button class="btn btn-info" title="Edit" data-toggle="modal" data-target="#exampleModalCenter2" (click)="edit_live(row.id)"><i class="fa fa-edit"></i></button>
+                        <button class="btn btn-danger" title="Delete" (click)="deleteLive(row.id)"><i class="fa fa-trash"></i></button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
